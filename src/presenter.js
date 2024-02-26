@@ -1,15 +1,30 @@
 import sumar from "./sumador";
+import multiplicar from "./multiplicacion";
 
 const first = document.querySelector("#primer-numero");
 const second = document.querySelector("#segundo-numero");
-const form = document.querySelector("#sumar-form");
+const form = document.querySelector("#operacion-form");
 const div = document.querySelector("#resultado-div");
 
-form.addEventListener("submit", (event) => {
+form.addEventListener('submit', function(event) {
   event.preventDefault();
 
   const firstNumber = Number.parseInt(first.value);
   const secondNumber = Number.parseInt(second.value);
+  const submitButtonValue = event.submitter.value;
 
-  div.innerHTML = "<p>" + sumar(firstNumber, secondNumber) + "</p>";
+  let resultado;
+
+  switch (submitButtonValue) {
+    case 'sumar':
+      resultado = sumar(firstNumber, secondNumber);
+      break;
+    case 'multiplicar':
+      resultado = multiplicar(firstNumber, secondNumber);
+      break;
+    default:
+      resultado = 'Operación no válida';
+  }
+
+  div.innerHTML = "<p>" + resultado + "</p>";
 });
